@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCMS</title>
+    <style>
+        body{
+            background-color: cadetblue;
+        }
+    </style>
+    {%load static%}
+    <link rel="stylesheet" href="/static/css/s2.css">
+    <link rel="stylesheet" href="/static/css/s1.css">
+
+</head>
+<body>
+    {% for message in messages%}
+    <div class="alert alert-{{message.tags }} alert-dismissible fade show" role="alert">
+        <strong>Message:</strong>{{message}}
+        <button type="submit" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+    <h3>Hello {{fname}} !!</h3>
+    <h4>You're successfully logged in.</h4>
+    <button type="submit"><a href="/signOut">SIGNOUT</a></button>
+
+    <table>
+        
+        <th><font size="4" >Order_Name*</font></th>
+        <th><font size="4" >Order_Number*</font></th>
+        <th><font size="4" >Item_Number *</font></th>
+        <th><font size="4" >Prices</font></th>
+        <tr>
+            <td>Sparkling wine</td>            
+            <td>1000</td>
+            <td>100</td>
+            <td>550.50</td>
+        </tr>
+        <tr>
+            <td> Champagne</td>
+            <td>1001</td>
+            <td>101</td>
+            <td> 900.00</td>
+        </tr>
+        <tr>
+            <td>Cabernet sauvignon</td>
+            <td>1002</td>
+            <td>102</td>
+            <td>605.00</td>
+        </tr>
+        <tr>
+            <td> Riesling</td>
+            <td>1003</td>
+            <td>103</td>
+            <td>700.00</td>
+        </tr>
+
+    </table>
+
+    <div class="banner-img"></div>
+    <div class="banner-text">   
+    <form action= "{% url 'saveenquiry'%}" method="post">
+    {% csrf_token %}
+        <label for="">Order_Number</label>
+        <input type="number" id="order_number" name="order_number" placeholder="Enter Order_Number" required>
+        <br><br>    
+        <label for="">Item_Number</label>
+        <input type="number" id="item_number" name="item_number" placeholder="Enter Item_Number" required>
+        <br><br> 
+        <label for="">Time</label>
+        <input type="time" id="time_order_placed" name="time_order_placed" placeholder="Enter Time" required>
+        <br><br> 
+        <label for="">Quantity</label>
+        <input type="number" id="quantity" name="quantity" placeholder="Enter Quantity" required>
+        <br><br> 
+        <label for="">Customer_Id</label>
+        <input type="password" id="customer_id" name="customer_id" placeholder="Enter Customer_Id" required>
+        <br><br> 
+        <button type="submit">Place_Order</button>
+    </form>
+    </div>
+
+
+    {% else %}
+    <table border="3" width="100%" bgcolor = "yellow" >
+        <tr>
+            <!-- <th><font color ="yellow" size="4" ><a href="/signUp">MY NIGHTCLUB</a></font></th> -->
+            <th><font size="4" ><a href="/aboutUs">ABOUT US</a></font></th>
+            <th><font color ="yellow" size="4" ><a href="/images">IMAGES</a></font></th>
+            <th><font color ="yellow" size="4" ><a href="/signUp">SIGNUP</a></font></th>
+            <th><font color ="yellow" size="4" ><a href="/signIn">SIGNIN</a></font></th>
+        </tr>
+    </table>
+    <!-- <div class="container">
+        <div class="button">
+        <a href="/signUp">SIGNUP</a><br><br></div>
+        <div class="button">
+        <a href="/signIn">SIGNIN</a><br></div>
+        <div class="button">
+        <a href="/images">IMAGES</a><br></div>
+        <div class="button">
+        <a href="/aboutUs">ABOUT US</a><br></div>        
+    </div> -->
+    <b><h1 align = "center">Cafe'de UP</h1></b>
+    <h2 align = "center">Welcome !!</h2>
+    <img src="{% static 'images/img1.jpg'%}" width="100%">
+    {% endif %}
+    
+    
+    
+    <!-- <h2>Table</h2>
+    <h3 style="color :red;">Regis form</h3>
+    <form>
+        Name: <input type="text" placeholder="Enter name"><br>
+        select gender: <input type="radio"name="gender">M
+        <input type="radio"name="gender">F <br>
+        <button type="submit" value="submit"> submit</button>
+
+    </form> -->
+</body>
+</html>
